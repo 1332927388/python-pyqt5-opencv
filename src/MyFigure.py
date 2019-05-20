@@ -1,3 +1,5 @@
+#生成折线图
+
 import matplotlib 
 matplotlib.use("QT5Agg")
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
