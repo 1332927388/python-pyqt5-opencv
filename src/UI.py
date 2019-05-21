@@ -7,28 +7,6 @@ from PyQt5.QtWidgets import QFrame,QSplitter,QTextEdit,QLineEdit,QSplitter
 from PyQt5.QtGui import QIcon
 from PyQt5.Qt import QSize
 from MyFigure import MyFigure
-#创建一个matplotlib图形绘制类
-# class MyFigure(FigureCanvas):
-#     def __init__(self,width=1, height=1, dpi=100):
-#         #第一步：创建一个创建Figure
-#         self.fig = Figure(figsize=(width, height), dpi=dpi)
-#         #第二步：在父类中激活Figure窗口
-#         super(MyFigure,self).__init__(self.fig) #此句必不可少，否则不能显示图形
-#         #第三步：创建一个子图，用于绘制图形用，111表示子图编号，如matlab的subplot(1,1,1)
-#         #self.axes = self.fig.add_subplot(111)
-#     #第四步：就是画图，【可以在此类中画，也可以在其它类中画】
-#     def plotsin(self):
-#         self.axes0 = self.fig.add_subplot(111)
-#         # t = np.arange(0.0, 3.0, 0.01)
-#         # s = np.sin(2 * np.pi * t)
-#         # self.axes0.plot(t, s)
-
-#         x=(0,1,2,3,4,5,6,7,8)
-#         y1=(1,3,2,4,56,7,7,7,5)
-#         self.axes0.set_xlabel('t/h')
-#         self.axes0.set_ylabel('temperature/℃')
-#         self.axes0.plot(x,y1)
-
 
 class mywindow(QWidget):
     def __init__(self):
@@ -235,14 +213,6 @@ class mywindow(QWidget):
         self.topright.addWidget(WorkFrame)
         
         
-        
-        
-        
-        
-        
-        
-        
-        
         #第三个,底部,串口通信框
         bottom = QFrame(self)
         bottom.setFrameShape(QFrame.StyledPanel)
@@ -300,8 +270,3 @@ class mywindow(QWidget):
         self.topright.setCurrentIndex(1)
     def work(self):
         self.topright.setCurrentIndex(2)
-
-# if __name__ == '__main__':
-#     app = QtWidgets.QApplication(sys.argv)
-#     window = mywindow()
-#     sys.exit(app.exec_())
