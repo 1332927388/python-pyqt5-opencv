@@ -33,7 +33,7 @@ def ReadData(ser):
     # 循环接收数据，此为死循环，可用线程实现
     while BOOL:
         if ser.in_waiting:
-            #STRGLO = ser.readline(ser.in_waiting).decode("UTF-8")
+            STRGLO = ser.readline(ser.in_waiting).decode("UTF-8")
             print(STRGLO.replace('\r\n', ''))
             recFlag=True
 

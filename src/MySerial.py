@@ -24,7 +24,10 @@ class MySerial():
                 com=(re.findall(p1,str(port_list[i]))[0])
         return com
 
-    def senddata(self,data):
+    def ReadData(self)
+        
+    
+    def SendData(self,data):
 
 
 
