@@ -28,6 +28,14 @@ class mywindow(QWidget):
         self.fasong_btn3.setFixedSize(100,60)
         self.fasong_btn3.clicked.connect(self.work)
         
+        #工作模式按钮
+        self.workmodule1=QPushButton('模式1',self)
+        self.workmodule1.setFixedSize(50,50)
+        self.workmodule2=QPushButton('模式2',self)
+        self.workmodule2.setFixedSize(50,50)
+        self.workmodule3=QPushButton('模式3',self)
+        self.workmodule3.setFixedSize(50,50)
+        
         #存储按钮
         self.cunchu_btn1 = QPushButton('',self)
         self.cunchu_btn1.setFixedSize(50,50)
@@ -113,9 +121,9 @@ class mywindow(QWidget):
         #hbox = QHBoxLayout(self)
         ###将界面分割成可以自由拉伸的三个窗口
         #第一个,左上角,图像显示框
-        topleft = QFrame(self)
-        topleft.setFrameShape(QFrame.StyledPanel)
-        topleft.setLayout(vlayout)
+        self.topleft = QFrame(self)
+        self.topleft.setFrameShape(QFrame.StyledPanel)
+        self.topleft.setLayout(vlayout)
         #第二个,右上角串口选择框
         
         self.topright = QStackedWidget(self)
@@ -214,16 +222,23 @@ class mywindow(QWidget):
         
         
         #第三个,底部,串口通信框
-        bottom = QFrame(self)
-        bottom.setFrameShape(QFrame.StyledPanel)
+        self.bottom = QFrame(self)
+        self.bottom.setFrameShape(QFrame.StyledPanel)
+        bwg=QHBoxLayout()
+        bwg.addWidget(self.workmodule1)
+        bwg.addWidget(self.workmodule2)
+        bwg.addWidget(self.workmodule3)
+        self.bottom.setLayout(bwg)
+
+
         #调用splitter控件,使窗口可以拖动起来
         splitter1 = QSplitter(Qt.Horizontal)
-        splitter1.addWidget(topleft)
+        splitter1.addWidget(self.topleft)
         splitter1.addWidget(self.topright)
         splitter1.setSizes([80,600])
         splitter2=QSplitter(Qt.Vertical)
         splitter2.addWidget(splitter1)
-        splitter2.addWidget(bottom)
+        splitter2.addWidget(self.bottom)
         splitter2.setSizes([800,200])
         self.GlobalLayout.addWidget(splitter2)
         #topright.setLayout(hbox)
