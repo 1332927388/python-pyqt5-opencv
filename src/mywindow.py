@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtCore, QtGui,QtWidgets
-from PyQt5.QtCore import  Qt
+from PyQt5.QtCore import  Qt,QBasicTimer
 from PyQt5.QtWidgets import QWidget,QMessageBox,QStackedWidget,QProgressBar
 from PyQt5.QtWidgets import QPushButton,QHBoxLayout,QVBoxLayout,QStackedLayout,QGridLayout
 from PyQt5.QtWidgets import QFrame,QSplitter,QTextEdit,QLineEdit,QSplitter
@@ -12,6 +12,9 @@ class mywindow(QWidget):
         super().__init__()
         self.initUI()
     def initUI(self):
+
+        self.timer = QBasicTimer()
+        self.step = 0
         #全局布局
         self.GlobalLayout=QHBoxLayout()
         #三个按钮
@@ -273,6 +276,12 @@ class mywindow(QWidget):
     def work(self):
         self.topright.setCurrentIndex(2)
 
+    def timerEvent(self, event):
+            if self.step >=100:
+                self.timer.stop()
+                return
+            self.step = self.step + 1
+            self.pbar.setValue(self.step)
 
 
 

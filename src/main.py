@@ -14,59 +14,74 @@ class main_window(mywindow):
         self.ser = MySerial()
         self.cmd=command()
         self.cmdlist=self.cmd.getCommand()
+        #print(self.cmdlist)
         self.BOOL=False
         self.workmodule1.clicked.connect(self.workmodule_1)
         self.workmodule2.clicked.connect(self.workmodule_2)
         self.workmodule3.clicked.connect(self.workmodule_3)
-        print(self.ser.ReadData())
-        #threading.Thread(target=self.workmodule_1,).start()
-        #threading.Thread(target=self.workmodule_2).start()
-        threading.Thread(target=self.workmodule_3).start()
+    
+    #点击按钮后    打开指令发送线程
     def workmodule_1(self):
-        text = ''
-        text = self.ser.receivedata
-        for i in range(len(self.cmdlist)):
-            for m in range(len(self.cmdlist[i])):
-                if 'step' in text:
-                    self.ser.SendData(self.cmdlist[i][m])
-                    ser.write(bytes.fromhex('0D 0A'))
-                    time.sleep(1)
-                    text=''
-                while (~('step' in text)):
-                    text=self.ser.receivedata
-                    continue
+        threading.Thread(target=self.workmodule_31).start()
     def workmodule_2(self):
-        text = ''
-        text = self.ser.receivedata
-        for i in range(len(self.cmdlist)):
-            for m in range(len(self.cmdlist[i])):
-                if 'step' in text:
-                    self.ser.SendData(self.cmdlist[i][m])
-                    ser.write(bytes.fromhex('0D 0A'))
-                    print('why')
-                    time.sleep(1)
-                    text=''
-                while (~('step' in text)):
-                    text=self.ser.receivedata
-                    continue
+        threading.Thread(target=self.workmodule_32).start()
     def workmodule_3(self):
-        # while True:
-        #     i=len(self.cmdlist)
-        text = ''
-        text = self.ser.receivedata
+        threading.Thread(target=self.workmodule_33).start()
+    
+    
+    
+    #按顺序发送指令
+    def workmodule_31(self):
         print('why')
         for i in range(len(self.cmdlist)):
             for m in range(len(self.cmdlist[i])):
-                if 'step' in text:
-                    self.ser.SendData(self.cmdlist[i][m])
-                    ser.write(bytes.fromhex('0D 0A'))
+                self.ser.SendData(self.cmdlist[i][m])
+                text=''
+                while not('STEP' in text):
+                    print(self.cmdlist[i][m])
+                    text = self.ser.ReadData()
                     print(text)
-                    time.sleep(1)
-                    text=''
+    def workmodule_32(self):
+        print('why')
+        for i in range(len(self.cmdlist)):
+            for m in range(len(self.cmdlist[i])):
+                self.ser.SendData(self.cmdlist[i][m])
+                text=''
+                while not('STEP' in text):
+                    print(self.cmdlist[i][m])
+                    text = self.ser.ReadData()
+                    print(text)
+    def workmodule_33(self):
+        # while True:
+        #     i=len(self.cmdlist)
+        #self.ser.SendData('AA A0 01 01 00 00 10 ff ')
+        # text = ''
+        # text = self.ser.ReadData()
+        print('why')
+        for i in range(len(self.cmdlist)):
+            for m in range(len(self.cmdlist[i])):
+                #if 'STEP' in text:
+                    # while ('step in text')
+                    #self.ser.SendData(self.cmdlist[i][m])
+                #self.ser.SendData('AA A0 01 01 00 00 10 ff ')
+                    #ser.write(bytes.fromhex('0D 0A'))
+                    # text=self.ser.ReadData()
+                    # print(text+'why')
+                        #time.sleep(1)
+                #print(self.cmdlist[i][m])
+                self.ser.SendData(self.cmdlist[i][m])
+                text=''
+                while not('STEP' in text):
+                    #time.sleep(0.6)
+                    #threading.Thread(target=self.ser.SendData,args=self.cmdlist[i][m])
+                    #self.ser.SendData(self.cmdlist[i][m])
+                    print(self.cmdlist[i][m])
+                    text = self.ser.ReadData()
+                    print(text)
+
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = main_window()
-    # cmd=command()#获取所有指令集,大小为7*n的二维矩阵
-    # print(cmd.getCommand())
     sys.exit(app.exec_())
