@@ -10,19 +10,19 @@ class MySerial():
         self.receivedata='pok'
         self.initSerial()
     def initSerial(self):
-        self.comnumber = self.getcom()
-        self.ser=serial.Serial(self.comnumber,115200,timeout=0.8)
+        #self.comnumber = self.getcom()
+        self.ser=serial.Serial('COM8',9600,timeout=0.8)
         #threading.Thread(target=self.ReadData).start()
-    #系统自动获取当前连接的COM口
-    def getcom(self):
-        port_list = list(serial.tools.list_ports.comports())
-        p1 = re.compile(r'[(](.*?)[)]', re.S)
-        com=''
-        if len(port_list) == 1:
-            for i in range(0,len(port_list)):
-                com=(re.findall(p1,str(port_list[i]))[0])
-        print(com)
-        return com
+    # #系统自动获取当前连接的COM口
+    # def getcom(self):
+    #     port_list = list(serial.tools.list_ports.comports())
+    #     p1 = re.compile(r'[(](.*?)[)]', re.S)
+    #     com=''
+    #     if len(port_list) == 1:
+    #         for i in range(0,len(port_list)):
+    #             com=(re.findall(p1,str(port_list[i]))[0])
+    #     print(com)
+    #     return com
 
     def ReadData(self):
         #while True:

@@ -79,7 +79,7 @@ def DReadPort():
             return str0,str1
 
 if __name__=="__main__":
-    ser,ret=DOpenPort("COM4",9600,1)
+    ser,ret=DOpenPort("COM8",9600,1)
     STEP='STEP'
     GET='GET'
     if(ret==True):#判断串口是否成功打开
